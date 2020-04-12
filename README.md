@@ -1,6 +1,6 @@
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="https://worldofcoding.net/worldofcoding.png" alt="WorldofCoding" href="https://worldofcoding.net/" target="_blank"></a>
+ <img width=300px height=200px src="https://worldofcoding.net/worldofcoding.png" alt="WorldofCoding" href="https://worldofcoding.net/" target="_blank"></a>
 </p>
 
 <h3 align="center">OT-Playbook Automatic Server Installation</h3>
