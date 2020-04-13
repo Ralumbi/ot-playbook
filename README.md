@@ -4,7 +4,7 @@
 
 ---
 
-<p align="center"> This project is made for the ease of installing your ubuntu 20.04 lts server optimized for tibia otserver hosting without breaking your head. <br> </p>
+<p align="center"> This project is made for the ease of installing your ubuntu 20.04 lts server optimized for tibia otserver hosting without breaking your head. This playbook should work from ubuntu 16.04 lts up to 20.04 lts. <br> </p>
 
 ## 📝 Table of Contents
 
