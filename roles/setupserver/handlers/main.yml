@@ -1,0 +1,29 @@
+---
+
+#reload systemd
+- name: reload systemd
+  command: systemctl daemon-reload
+
+#systemd handler
+- name: restart systemd-journald
+  service:
+    name: systemd-journald
+    state: restarted
+
+#php handler
+- name: restart php{{php_version_number}}-fpm
+  service:
+    name: php{{php_version_number}}-fpm
+    state: restarted
+
+#nginx handler
+- name: restart nginx
+  service:
+    name: nginx
+    state: restarted
+
+#mysql handler
+- name: restart mysql
+  service:
+    name: mysql
+    state: restarted

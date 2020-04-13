@@ -1,0 +1,12 @@
+[Unit]
+Description=OT GameServer
+After=network.target mysql.service
+
+[Service]
+Type=simple
+ExecStart=/home/otadmin/forgottenserver/build/tfs
+WorkingDirectory=/home/otadmin/forgottenserver
+Restart=always
+
+[Install]
+WantedBy=default.target

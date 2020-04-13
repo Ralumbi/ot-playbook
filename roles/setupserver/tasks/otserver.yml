@@ -1,0 +1,91 @@
+---
+
+- name: install gameserver essentials
+  apt:
+    state: latest
+    name:
+        - build-essential
+        - make
+        - cmake
+        - libgmp3-dev
+        - libmysqlclient-dev
+        - libboost-filesystem-dev
+        - liblua5.2-dev
+        - libpugixml-dev
+        - libluajit-5.1-dev
+        - libboost-iostreams-dev
+        - libcrypto++-dev
+
+- name: download latest tfs
+  git:
+    repo: https://github.com/otland/forgottenserver.git
+    dest: /home/otadmin/forgottenserver
+
+- name: parse existing config.lua
+  shell: grep -s mysqlPass /home/otadmin/forgottenserver/config.lua | sed -E 's/mysqlPass = "(.*)"/\1/g'
+  register: existingpass
+
+- name: generate mysql password for forgottenserver
+  command: openssl rand -base64 18
+  register: randompass
+  when: not existingpass.stdout
+
+- name: create forgottenserver database user
+  mysql_user:
+    name: forgottenserver
+    password: "{{ mysql_forgottenserver_pass }}"
+    priv: forgottenserver.*:ALL
+    check_implicit_admin: yes
+
+- name: create database for forgottenserver
+  mysql_db:
+    name: forgottenserver
+
+- name: import database for forgottenserver
+  mysql_db:
+    name: forgottenserver
+    state: import
+    target: /home/otadmin/forgottenserver/schema.sql
+
+- name: change config.lua.dist to config.lua
+  copy:
+    dest: /home/otadmin/forgottenserver/config.lua
+    src: /home/otadmin/forgottenserver/config.lua.dist
+    remote_src: yes
+    owner: otadmin
+    group: otadmin
+
+- name: configure password for database in config.lua
+  lineinfile:
+    dest: /home/otadmin/forgottenserver/config.lua
+    regexp: ^mysqlPass
+    line: 'mysqlPass = "{{mysql_forgottenserver_pass}}"'
+
+- name: put default ipv4 in config.lua
+  lineinfile:
+    dest: /home/otadmin/forgottenserver/config.lua
+    regexp: "^ip ="
+    line: 'ip = "{{ansible_default_ipv4.address}}"'
+
+- name: create build directory
+  file:
+    path: /home/otadmin/forgottenserver/build
+    owner: otadmin
+    group: otadmin
+    mode: 0755
+    state: directory
+
+- name: cmake forgottenserver source
+  command: cmake ..
+  args:
+    chdir: /home/otadmin/forgottenserver/build
+  tags: compile
+
+- name: compile forgottenserver
+  command: make -j4
+  args:
+    chdir: /home/otadmin/forgottenserver/build
+  tags: compile
+
+- name: set directory permissions
+  command: chown -R otadmin:otadmin /home/otadmin/forgottenserver

@@ -1,0 +1,11 @@
+---
+- name: installing essential packages
+  apt:
+    state: latest
+    name:
+      - git
+      - htop
+      - curl
+      - net-tools
+      - python3-certbot-nginx
+

@@ -1,0 +1,101 @@
+---
+
+- name: installing mysql server and automysqlbackup
+  apt:
+    state: latest
+    name:
+        - mariadb-server
+        - python3-mysqldb
+        - automysqlbackup
+
+- name: change mysql charset
+  template:
+    src: 60-charset.cnf
+    dest: /etc/mysql/mariadb.conf.d/60-charset.cnf
+  notify: restart mysql
+
+- name: create systemd mariadb server dir
+  file:
+    path: /etc/systemd/system/mariadb.service.d/
+    state: directory
+
+- name: configure systemd mariadb
+  copy:
+    dest: /etc/systemd/system/mariadb.service.d/user-wait.conf
+    content: |
+        [Unit]
+        Before=user@1000.service
+  notify: reload systemd
+
+- name: start mariadb
+  service:
+    name: mysql
+    state: restarted
+    enabled: yes
+
+- name: parse existing .my.cnf
+  shell: grep -s pass /home/otadmin/.my.cnf | sed 's/password=//'
+  register: existingpass
+
+- name: generate random mysql password
+  command: openssl rand -base64 18
+  register: randompass
+  when: not existingpass.stdout
+
+- name: set mysql password for localhost
+  mysql_user:
+    name: otadmin
+    password: "{{ mysql_otadmin_pass }}"
+    host: "localhost"
+    priv: "*.*:ALL,GRANT"
+    check_implicit_admin: yes
+
+- name: set mysql password for %
+  mysql_user:
+    name: otadmin
+    password: "{{ mysql_otadmin_pass }}"
+    host: "%"
+    priv: "*.*:ALL,GRANT"
+    check_implicit_admin: yes
+
+- name: save mysql password
+  template:
+    src: .my.cnf
+    dest: /home/otadmin/.my.cnf
+    owner: otadmin
+    group: otadmin
+    mode: 0600
+
+- name: grep hostname
+  command: hostname -f
+  register: otadminhostname
+
+- name: cleaning up mysql accounts
+  mysql_user:
+    name: root
+    host: "{{item}}"
+    state: absent
+    check_implicit_admin: yes
+  with_items:
+    - 127.0.0.1
+    - ::1
+    - otadminhostname.stdout
+    - "%"
+
+- name: checking if mysql account cleaning succeed
+  mysql_user:
+    name: ""
+    host_all: yes
+    state: absent
+    check_implicit_admin: yes
+
+- name: deleting mysql test db
+  mysql_db:
+    name: test
+    state: absent
+
+- name: allow otadmin access to the automysqlbackup feature
+  file:
+    path: /var/lib/automysqlbackup
+    state: directory
+    group: otadmin

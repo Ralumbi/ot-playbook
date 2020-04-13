@@ -1,0 +1,17 @@
+---
+- name: installing nginx
+  apt:
+    name: nginx
+    state: latest
+
+- name: set nginx default config
+  template:
+    src: nginx-vhost.conf
+    dest: /etc/nginx/sites-available/default
+  notify: restart nginx
+
+- name: start and enable nginx service
+  service:
+    name: nginx
+    state: started
+    enabled: yes

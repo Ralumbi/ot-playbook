@@ -1,0 +1,8 @@
+#!/bin/bash
+echo ""
+echo -e '\E[36;40mWelcome to OT-Playbook by WorldofCoding!'"\033[1m\033[0m"
+echo ""
+echo -e '\E[36;40mIf you need support please contact me directly using one for the following methods:'"\033[1m\033[0m"
+echo -e '\E[36;40mdiscord: Caleb#2103'"\033[1m\033[0m"
+echo -e '\E[36;40me-mail: admin@worldofcoding.net'"\033[1m\033[0m"
+echo -e '\E[36;40mhttps://worldofcoding.net'"\033[1m\033[0m"

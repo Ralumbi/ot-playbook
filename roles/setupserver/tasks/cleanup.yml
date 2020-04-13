@@ -1,0 +1,12 @@
+- name: cleanup unnecessary packages
+  apt:
+    state: absent
+    pkg:
+      - lxc
+      - lxd
+      - snapd
+
+- name: disable cloud motd
+  file:
+    path: /etc/update-motd.d/51-cloudguest
+    state: absent

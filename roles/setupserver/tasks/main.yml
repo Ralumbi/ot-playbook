@@ -1,0 +1,14 @@
+---
+- name: update && upgrade system
+  apt:
+    upgrade: full
+
+- include: essentials.yml
+- include: cleanup.yml
+- include: user.yml
+- include: systemd.yml
+- include: php.yml
+- include: nginx.yml
+- include: mysql.yml
+- include: phpmyadmin.yml
+- include: otserver.yml

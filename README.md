@@ -1,25 +1,19 @@
-<p align="center">
-  <a href="" rel="noopener">
- <img width=300px height=200px src="https://worldofcoding.net/worldofcoding.png" alt="WorldofCoding" href="https://worldofcoding.net/" target="_blank"></a>
-</p>
+<p align="center"> <a href="https://worldofcoding.net/" target="_blank" rel="noopener"> <img width=300px height=200px src="https://worldofcoding.net/worldofcoding.png" alt="WorldofCoding"></a> </p>
 
 <h3 align="center">OT-Playbook Automatic Server Installation</h3>
 
 ---
 
-<p align="center">
-This project is made for the ease of installing your ubuntu 20.04 lts server optimized for tibia otserver hosting without breaking your head.
-    <br> 
-</p>
+<p align="center"> This project is made for the ease of installing your ubuntu 20.04 lts server optimized for tibia otserver hosting without breaking your head. <br> </p>
 
 ## 📝 Table of Contents
 
-- [About](#about)
-- [Configure](#configure)
-- [Deployment](#deployment)
-- [Usage](#usage)
-- [Built Using](#built_using)
-- [Authors](#authors)
+* [About](#about)
+* [Configure](#configure)
+* [Deployment](#deployment)
+* [Usage](#usage)
+* [Built Using](#built_using)
+* [Authors](#authors)
 
 ## 🧐 About <a name = "about"></a>
 
@@ -27,42 +21,104 @@ The project started with the idea I've gotten from <a href="https://github.com/D
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See [deployment](#deployment) for notes on how to deploy the project on a live system.
+We will need to setup ansible on your machine first before we can continue. I will describe on how-to setup ansible on windows and ubuntu linux. When you have got this setup then the rest will be peanuts! 
 
-### Prerequisites
+See [deployment](#deployment) for notes on how to deploy the project on a live system.
+
+Note: Setting up ansible on your own machine is required when you are in need to install multiple servers. Or need to install it many times because you are running virtualbox on your machine to do tests/development in your linux system. Deploying the playbook on just one machine will also be described, but is not recommended. 
+
+### Prerequisites windows
+
+1. Open PowerShell as Administrator and run:
+
+```
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+```
+
+2. Restart your computer when prompted.
+3. Open the Microsoft Store and search for ubuntu.
+4. Install ubuntu 18.04 or higher.
+
+   Once installed you must run it and follow the instruction in the terminal.\
+   When everything is setup please continue with the Prerequisites ubuntu below:
+
+### Prerequisites ubuntu
 
 What things you need to install the software and how to install them.
 
 Ansible-Playbook
+
 ```
+sudo apt update && sudo apt upgrade -y
+sudo apt install git
 sudo apt install ansible
+git clone https://github.com/ralumbi/ot-playbook
+cd ot-playbook
 ```
+Now continue with the next steps
 
 ## 🔧 Configure the playbook <a name = "configure"></a>
 
-In the otHosts file you must configure the server(s) you want to install.
+In the hosts file you must configure the server(s) you want to install.
 
 ### Break down into pieces
 
-Coming soon...
+<img src="https://worldofcoding.net/github-img/file-structure.jpg" alt="file-structure">
 
-```
-Coming soon...
-```
+Open the hosts file there you will see:
 
+vim hosts
+```
+[setupserver]
+IPADDRESSHERE ansible_user=SERVERUSERNAME ansible_sudo_pass=SERVERPASSWORD
+```
+Press the insert key on your keyboard so you make the file able for editting.
+
+change IPADDRESSHERE to the ip-address of your server
+change SERVERUSERNAME to your servers username (for example root)
+change SERVERPASSWORD to your servers password
+
+Now you must press CTRL+C and write :wq after so you will write the changes and quit the file.
+We are set now!
 ## 🎈 Usage <a name="usage"></a>
 
-Coming soon.....
+Pre-sets:
+   php version: 7.4
+
+You can change the php version manually by editting the following file:
+```
+vim roles/setupserver/vars/main.yml
+```
+(Note: This is on the to-do list to make it automatically search for the php version and set it automatically as well)
+
+   Website location: /home/otadmin/www/public/
+GameServer location: /home/otadmin/forgottenserver/
+           Database: http://yourip:2344
+  Database password: Login the terminal with the otadmin user. You will find the mysql password in the begin screen.
 
 ## 🚀 Deployment <a name = "deployment"></a>
 
-Coming soon.....
+To use the playbook we will need to open the terminal we setup on windows or just open your terminal on ubuntu by CTRL+ALT+T.
+- Navigate to the directory. 
+- Set the hosts in the file.
+Now we simply write:
+```
+ansible-playbook letsplay.yml -i hosts
+```
+The server will now install and you will be able to login to the server with:
+```
+username: otadmin
+password: otadmin
+```
+Once you have logged in for the first time please change your password immediately by typing 'passwd' in the terminal.
+
 
 ## ⛏️ Built Using <a name = "built_using"></a>
 
-- [Ansible](https://www.ansible.com/) - Ansible-Playbook by Redhat
-- [Virtualbox](https://www.virtualbox.org/) - Virtualization for Operation-Systems
+* [Ansible](https://www.ansible.com/) - Ansible-Playbook by Redhat
+* [Virtualbox](https://www.virtualbox.org/) - Virtualization for Operation-Systems
+* [DevelopersPL](https://github.com/developersPL) - othosting-provisioning
 
 ## ✍️ Authors <a name = "authors"></a>
 
-- [@ralumbi](https://github.com/ralumbi) - Idea & Initial work
+* [@ralumbi](https://github.com/ralumbi)

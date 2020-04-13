@@ -1,0 +1,66 @@
+---
+
+- name: creating user otadmin
+  user:
+      name: otadmin
+      password: $6$mLjrnhr.1ySO0Y4y$EZfnyoGsSqIgw5u1/b9mO2iXQHypks.ZEWDDQcEG.aheqFb9CJQrwH7voqU3QpjPZAbvTsaqB.XbI3sw7anvo/
+      update_password: on_create
+      shell: /bin/bash
+      groups: systemd-journal
+      append: yes
+
+- name: set default editor for user
+  copy:
+      dest: /home/otadmin/.selected_editor
+      content: "SELECTED_EDITOR=\"/usr/bin/mcedit\""
+      owner: otadmin
+      group: otadmin
+
+- name: setting systemd conf dir
+  file:
+    path: /home/otadmin/.config/systemd/user/
+    owner: otadmin
+    group: otadmin
+    mode: 0755
+    state: directory
+
+- name: installing systemd service for gameserver
+  template:
+    src: gameserver.service
+    dest: /home/otadmin/.config/systemd/user/
+    owner: otadmin
+    group: otadmin
+    mode: 0644
+
+- name: enable linger for user
+  command: loginctl enable-linger otadmin
+
+- name: installing shell configuration
+  template:
+    src: .otadmin
+    dest: /home/otadmin/.otadmin
+    owner: otadmin
+    group: otadmin
+    mode: 0644
+
+- name: activate shell config
+  lineinfile:
+    dest: /home/otadmin/.bashrc
+    line: . ~/.otadmin
+    regexp: ^\. ~/\.otadmin
+
+- name:
+  file:
+    path: /home/otadmin/www/public
+    owner: otadmin
+    group: otadmin
+    mode: 0755
+    state: directory
+
+- name: installing command template
+  template:
+    src: 61-ot-playbook-motd
+    dest: /etc/update-motd.d/61-ot-playbook-motd
+    owner: root
+    group: root
+    mode: 0755

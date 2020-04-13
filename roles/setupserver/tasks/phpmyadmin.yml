@@ -1,0 +1,51 @@
+---
+
+- name: debconf installation
+  apt:
+    name: debconf-utils
+
+- name: debconf phpmyadmin install
+  debconf:
+    name: phpmyadmin
+    question: phpymadmin/dbconfig-install
+    value: True
+    vtype: boolean
+
+- name: debconf set app password confirm
+  debconf:
+      name: phpmyadmin
+      value: ''
+      vtype: password
+      question: phpmyadmin/app-password-confirm
+
+- name: debconf set admin password
+  debconf:
+    name: phpmyadmin
+    value: ''
+    vtype: password
+    question: phpmyadmin/mysql/admin-pass
+
+- name: debconf set app pass
+  debconf:
+      name: phpmyadmin
+      value: ''
+      vtype: password
+      question: phpmyadmin/mysql/app-pass
+
+- name: debconf reconf webserver
+  debconf:
+    name: phpmyadmin
+    value: ''
+    vtype: multiselect
+    question: phpmyadmin/reconfigure-webserver
+
+- name: installing phpmyadmin
+  apt:
+    name: phpmyadmin
+    state: latest
+
+- name: set nginx phpmyadmin config
+  template:
+    src: nginx-phpmyadmin.conf
+    dest: /etc/nginx/sites-enabled/phpmyadmin
+  notify: restart nginx

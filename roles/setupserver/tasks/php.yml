@@ -1,0 +1,66 @@
+---
+- name: installing php
+  apt:
+    state: latest
+    name:
+        - php-fpm
+        - php-mysqlnd
+        - php-curl
+        - php-mbstring
+        - php-intl
+        - php-xml
+        - php-apcu
+        - composer
+
+- name: configure php.ini errors
+  lineinfile:
+    dest: /etc/php/{{ php_version_number }}/fpm/php.ini
+    line: "display_errors = On"
+    regexp: "^display_errors ="
+  notify: restart php{{ php_version_number }}-fpm
+
+- name: configure php.ini timezone
+  lineinfile:
+    dest: /etc/php/{{ php_version_number }}/fpm/php.ini
+    line: "date.timezone = Europe/Amsterdam"
+    regexp: "^date.timezone ="
+  notify: restart php{{ php_version_number }}-fpm
+
+- name: configure php.ini upload_max_filesize
+  lineinfile:
+    dest: /etc/php/{{ php_version_number }}/fpm/php.ini
+    line: "upload_max_filesize = 256M"
+    regexp: "^upload_max_filesize ="
+  notify: restart php{{ php_version_number }}-fpm
+
+- name: configure php.ini post_max_size
+  lineinfile:
+    dest: /etc/php/{{ php_version_number }}/fpm/php.ini
+    line: "post_max_size = 128M"
+    regexp: "^post_max_size ="
+  notify: restart php{{ php_version_number }}-fpm
+
+- name: configure php-fpm pool
+  template:
+    src: php-fpm-pool.conf
+    dest: /etc/php/{{ php_version_number }}/fpm/pool.d/otadmin.conf
+  notify: restart php{{ php_version_number }}-fpm
+
+- name: create systemd system/php{{ php_version_number }}-fpm.service.d directory
+  file:
+    dest: /etc/systemd/system/php{{ php_version_number }}-fpm.service.d
+    state: directory
+
+- name: configure session-dir.conf unit override for php{{ php_version_number }}-fpm
+  template:
+    src: systemd/php-session-dir.conf
+    dest: /etc/systemd/system/php{{ php_version_number }}-fpm.service.d/session-dir.conf
+  notify:
+    - reload systemd
+    - restart php{{ php_version_number }}-fpm
+
+- name: start php{{ php_version_number }}-fpm service
+  service:
+    name: php{{ php_version_number }}-fpm
+    state: started
+    enabled: true
