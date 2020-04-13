@@ -63,7 +63,7 @@ In the hosts file you must configure the server(s) you want to install.
 
 ### Break down into pieces
 
-<img src="https://worldofcoding.net/github-img/file-structure.jpg" alt="file-structure">
+<img src="https://worldofcoding.net/github-img/folder-structure.png" alt="folder-structure">
 
 Open the hosts file there you will see:
 
