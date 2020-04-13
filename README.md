@@ -91,10 +91,10 @@ vim roles/setupserver/vars/main.yml
 ```
 (Note: This is on the to-do list to make it automatically search for the php version and set it automatically as well)
 
-   Website location: /home/otadmin/www/public/
-GameServer location: /home/otadmin/forgottenserver/
-           Database: http://yourip:2344
-  Database password: Login the terminal with the otadmin user. You will find the mysql password in the begin screen.
+*   Website location: /home/otadmin/www/public/
+*GameServer location: /home/otadmin/forgottenserver/
+*           Database: http://yourip:2344
+*  Database password: Login the terminal with the otadmin user. You will find the mysql password in the begin screen.
 
 ## 🚀 Deployment <a name = "deployment"></a>
 
