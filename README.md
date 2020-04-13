@@ -73,11 +73,11 @@ vim hosts
 IPADDRESSHERE ansible_user=SERVERUSERNAME ansible_sudo_pass=SERVERPASSWORD
 ```
 Press the insert key on your keyboard so you make the file able for editting.
-
+```
 change IPADDRESSHERE to the ip-address of your server
 change SERVERUSERNAME to your servers username (for example root)
 change SERVERPASSWORD to your servers password
-
+```
 Now you must press CTRL+C and write :wq after so you will write the changes and quit the file.
 We are set now!
 ## 🎈 Usage <a name="usage"></a>
@@ -91,10 +91,10 @@ vim roles/setupserver/vars/main.yml
 ```
 (Note: This is on the to-do list to make it automatically search for the php version and set it automatically as well)
 
-*   Website location: /home/otadmin/www/public/
-*GameServer location: /home/otadmin/forgottenserver/
-*           Database: http://yourip:2344
-*  Database password: Login the terminal with the otadmin user. You will find the mysql password in the begin screen.
+- Website location: /home/otadmin/www/public/
+- GameServer location: /home/otadmin/forgottenserver/
+- Database: http://yourip:2344
+- Database password: Login the terminal with the otadmin user. You will find the mysql password in the begin screen.
 
 ## 🚀 Deployment <a name = "deployment"></a>
 
