@@ -5,8 +5,20 @@
     state: latest
     name:
         - mariadb-server
-        - python3-mysqldb
         - automysqlbackup
+        
+- name: python mysql < 20
+  apt:
+    name:
+      - python-mysqldb
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version < '20.04'
+
+- name: python mysql >= 20
+  apt:
+    name:
+      - python3-mysqldb
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version >= '20.04'
+      
 
 - name: change mysql charset
   template:
