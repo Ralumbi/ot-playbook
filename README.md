@@ -101,6 +101,21 @@ vim roles/setupserver/vars/main.yml
 To use the playbook we will need to open the terminal we setup on windows or just open your terminal on ubuntu by CTRL+ALT+T.
 - Navigate to the directory. 
 - Set the hosts in the file.
+
+Before we can run the playbook we got to open up our ssh connection one-way towards the server.
+First we create a ssh key;
+```
+ssh-keygen
+presh enter 3 times (you don't need to protect this key, if you do you have to make sure you save the password to it!!!)
+I personally never do.
+```
+Then we have to copy the public key to the server;
+```
+ssh-copy-id -i ~/.ssh/id_rsa.pub YOURNAME@YOURSERVER
+```
+YOURNAME    = your username (example: root)
+YOURSERVER  = your servername (example: 127.0.0.1 or domain.com)
+
 Now we simply write:
 ```
 ansible-playbook letsplay.yml -i hosts
