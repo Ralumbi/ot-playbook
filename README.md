@@ -82,6 +82,12 @@ Now you must press CTRL+C and write :wq after so you will write the changes and 
 We are set now!
 ## 🎈 Usage <a name="usage"></a>
 
+Set your php version manually:
+```
+vim roles/setupserver/vars/main.yml
+```
+Uncomment the version of ubuntu you're using and comment the version which is uncommented :)
+
 - Website location: /home/otadmin/www/public/
 - GameServer location: /home/otadmin/forgottenserver/
 - Database: http://yourip:2344
