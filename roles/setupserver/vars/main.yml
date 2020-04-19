@@ -2,8 +2,6 @@
 # php variables
 # php -r 'echo PHP_VERSION;' | cut -c 1,2,3
 
-php_version_number: "{{ php_version.stdout }}"
-
 # mysql variables
 mysql_otadmin_pass: "{{ randompass.stdout if randompass is not skipped else existingpass.stdout }}"
 mysql_forgottenserver_pass: "{{ randompass.stdout if randompass is not skipped else existingpass.stdout }}"
