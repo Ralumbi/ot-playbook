@@ -82,24 +82,6 @@ Now you must press CTRL+C and write :wq after so you will write the changes and 
 We are set now!
 ## 🎈 Usage <a name="usage"></a>
 
-Pre-sets:
-   php version: 7.4
-
-You can change the php version manually by editting the following file:
-```
-vim roles/setupserver/vars/main.yml
-```
-You will need to set the php version to the version you will run!
-
-(defaults:
-- ubuntu 16.04 = 7.0
-- ubuntu 18.04 = 7.2
-- ubuntu 20.04 = 7.4
-
-);
-
-(Note: This is on the to-do list to make it automatically search for the php version and set it automatically as well)
-
 - Website location: /home/otadmin/www/public/
 - GameServer location: /home/otadmin/forgottenserver/
 - Database: http://yourip:2344
