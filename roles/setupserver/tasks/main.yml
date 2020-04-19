@@ -3,21 +3,6 @@
   apt:
     upgrade: full
 
-- name: check dist_vers for php vers 16.04
-  set_fact:
-    php_version: "7.0"
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version < '18.04'
-
-- name: check dist_vers for php vers 18.04
-  set_fact:
-    php_version: "7.2"
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '18.04'
-
-- name: check dist_vers for php vers 20.04
-  set_fact:
-    php_version: "7.4"
-  when: ansible_distribution == 'Ubuntu' and ansible_distribution_version >= '20.04'
-
 - include: essentials.yml
 - include: cleanup.yml
 - include: user.yml
