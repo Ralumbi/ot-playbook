@@ -1,2 +1,2 @@
 [setupserver]
-192.168.122.110 ansible_user=caleb ansible_sudo_pass=123123
+IPADDRESSHERE ansible_user=SERVERUSERNAME ansible_sudo_pass=SERVERPASSWORD

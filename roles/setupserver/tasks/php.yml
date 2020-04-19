@@ -4,6 +4,7 @@
     state: latest
     name:
         - php-fpm
+        - php-cli
         - php-mysqlnd
         - php-curl
         - php-mbstring
