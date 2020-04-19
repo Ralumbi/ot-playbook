@@ -2,7 +2,14 @@
 # php variables
 # php -r 'echo PHP_VERSION;' | cut -c 1,2,3
 
-php_version_number: "{{ php_version }}"
+php_version_number: "7.0"
+when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '16.04'
+
+php_version_number: "7.2"
+when: ansible_distribution == 'Ubuntu' and ansible_distribution_version == '18.04'
+
+php_version_number: "7.4"
+when: ansible_distribution == 'Ubuntu' and ansible_distribution_version >= '20.04'
 
 # mysql variables
 mysql_otadmin_pass: "{{ randompass.stdout if randompass is not skipped else existingpass.stdout }}"
