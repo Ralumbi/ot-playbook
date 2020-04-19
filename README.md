@@ -17,7 +17,7 @@
 
 ## 🧐 About <a name = "about"></a>
 
-The project started with the idea I've gotten from <a href="https://github.com/DevelopersPL/" target="_blank">DevelopersPL</a> which made the very first version of such playbook tibia otserver related. The reason I have made a new one is because I've been working with Marcus from <a href="https://mastercores.com" target="_blank">MasterCores</a> and <a href="https://retrocores.com" target="_blank">RetroCores</a>. The needs here were getting very huge as in many server installs and testing new server company's. Installing a complete server over and over manually gets you freaked out so we needed something which was just having what we demanded to have in there. Where the one which was already out there having too many extra's up for installation.
+The project started with the idea I've gotten from <a href="https://github.com/DevelopersPL/" target="_blank">DevelopersPL</a> which made the very first version of such playbook tibia otserver related. The reason I have made a new one is because I've been working with many different servers. The needs were getting very huge as in many server installs and testing new server company's. Installing a complete server over and over manually gets you freaked out so I needed something which was just having what I demanded to have. Where the one which was already out there having too many extra's up for installation.
 
 ## 🏁 Getting Started <a name = "getting_started"></a>
 
