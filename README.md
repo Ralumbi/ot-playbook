@@ -95,6 +95,9 @@ Uncomment the version of ubuntu you're using and comment the version which is un
 
 ## 🚀 Deployment <a name = "deployment"></a>
 
+If you're deploying it directly into the main machine and so you have only one machine you can use the following setup:
+Change in `letsplay.yml` `hosts: setupserver` to `hosts: localhost` and then deploy with `ansible-playbook letsplay.yml -i localhost`
+
 To use the playbook we will need to open the terminal we setup on windows or just open your terminal on ubuntu by CTRL+ALT+T.
 - Navigate to the directory. 
 - Set the hosts in the file.
