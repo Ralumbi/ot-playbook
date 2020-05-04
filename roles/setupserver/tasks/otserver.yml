@@ -8,13 +8,15 @@
         - make
         - cmake
         - libgmp3-dev
-        - libmysqlclient-dev
+        - libmysqlclient-dev 
         - libboost-filesystem-dev
+        - libboost-system-dev
         - liblua5.2-dev
         - libpugixml-dev
         - libluajit-5.1-dev
         - libboost-iostreams-dev
         - libcrypto++-dev
+          
 
 - name: download latest tfs
   git:
