@@ -1,2 +1,0 @@
-[setupserver]
-IPADDRESSHERE ansible_user=SERVERUSERNAME ansible_sudo_pass=SERVERPASSWORD
