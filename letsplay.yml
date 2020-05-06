@@ -1,6 +1,5 @@
 ---
-- name: looking for hosts to install the setupserver playbook
-  hosts: all
+- hosts: all
   become: yes
 
   roles:
