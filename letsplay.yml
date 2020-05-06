@@ -1,7 +1,7 @@
 ---
-all:
- hosts:
-  localhost
+- name: looking for hosts to install the setupserver playbook
+  hosts: localhost
+  connection: local
 
-roles:
- - setupserver
+  roles:
+  - setupserver
