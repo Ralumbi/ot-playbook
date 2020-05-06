@@ -1,8 +1,7 @@
 ---
-- name: looking for hosts to install the setupserver playbook
-  all:
-    hosts:
-        localhost
+all:
+ hosts:
+  localhost
 
-  roles:
-  - setupserver
+roles:
+ - setupserver
