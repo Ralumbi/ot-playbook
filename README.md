@@ -2,6 +2,13 @@
 
 <h3 align="center">OT-Playbook Automatic Server Installation</h3>
 
+CHANGES IN PROGRESS:
+   IF YOU WANT TO USE IT RIGHT NOW JUST RUN:
+      ```
+      sudo ansible-pull -i localhost, -U https://github.com/Ralumbi/ot-playbook.git letsplay.yml -d /tmp/ot-playbook --purge
+      ```
+A new complete guide will be written at a later time.
+
 ---
 
 <p align="center"> This project is made for the ease of installing your ubuntu 20.04 lts server optimized for tibia otserver hosting without breaking your head. This playbook should work from ubuntu 16.04 lts up to 20.04 lts. <br> </p>
