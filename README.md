@@ -2,11 +2,11 @@
 
 <h3 align="center">OT-Playbook Automatic Server Installation</h3>
 
-CHANGES IN PROGRESS:
-   IF YOU WANT TO USE IT RIGHT NOW JUST RUN:
-      ```
-      sudo ansible-pull -i localhost, -U https://github.com/Ralumbi/ot-playbook.git letsplay.yml -d /tmp/ot-playbook --purge
-      ```
+#### CHANGES IN PROGRESS:
+###### IF YOU WANT TO USE IT RIGHT NOW JUST RUN:
+```
+sudo ansible-pull -i localhost, -U https://github.com/Ralumbi/ot-playbook.git letsplay.yml -d /tmp/ot-playbook --purge
+```
 A new complete guide will be written at a later time.
 
 ---
